@@ -20,6 +20,7 @@
 		887525737BED0E41AB57D404 /* libPods-RNHealth-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0598FD2FD546ED818BEC9117 /* libPods-RNHealth-tvOSTests.a */; };
 		CDB2003E34852F513B429E0F /* libPods-RNHealth-RNHealthTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CA75AA5D939FCD90ED572FF9 /* libPods-RNHealth-RNHealthTests.a */; };
 		E390751D41C4A3618E1C9304 /* libPods-RNHealth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 842139222FD4CA3B91767423 /* libPods-RNHealth.a */; };
+		F5B063A7256BD8F4008E853E /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5B063A6256BD8F4008E853E /* HealthKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,8 @@
 		CA75AA5D939FCD90ED572FF9 /* libPods-RNHealth-RNHealthTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RNHealth-RNHealthTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		F5B063A5256BD8F4008E853E /* RNHealth.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = RNHealth.entitlements; path = RNHealth/RNHealth.entitlements; sourceTree = "<group>"; };
+		F5B063A6256BD8F4008E853E /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		FE216B44D3BDAAE8DCE8E965 /* Pods-RNHealth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNHealth.debug.xcconfig"; path = "Target Support Files/Pods-RNHealth/Pods-RNHealth.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,6 +86,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E390751D41C4A3618E1C9304 /* libPods-RNHealth.a in Frameworks */,
+				F5B063A7256BD8F4008E853E /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +129,7 @@
 		13B07FAE1A68108700A75B9A /* RNHealth */ = {
 			isa = PBXGroup;
 			children = (
+				F5B063A5256BD8F4008E853E /* RNHealth.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -139,6 +144,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F5B063A6256BD8F4008E853E /* HealthKit.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				842139222FD4CA3B91767423 /* libPods-RNHealth.a */,
@@ -194,7 +200,6 @@
 				9D144CC13F2B18BD269BA6AA /* Pods-RNHealth-tvOSTests.debug.xcconfig */,
 				3BA5192531F3AFCF7C0427B7 /* Pods-RNHealth-tvOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -294,6 +299,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = KBBPN83Q98;
 						LastSwiftMigration = 1120;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -655,7 +661,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = RNHealth/RNHealth.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = KBBPN83Q98;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = RNHealth/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -678,7 +686,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = RNHealth/RNHealth.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = KBBPN83Q98;
 				INFOPLIST_FILE = RNHealth/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (

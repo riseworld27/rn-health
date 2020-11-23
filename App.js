@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -14,17 +14,48 @@ import {
   View,
   Text,
   StatusBar,
+  Platform
 } from 'react-native';
+import AppleHealthKit from 'rn-apple-healthkit';
 
 import {
-  Header,
-  LearnMoreLinks,
   Colors,
-  DebugInstructions,
-  ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-const App: () => React$Node = () => {
+const App = () => {
+  const [steps, setSteps] = useState([]);
+  useEffect(() => {
+    if (Platform.OS === "ios") {
+      const PERMS = AppleHealthKit.Constants.Permissions;
+      const healthKitOptions = {
+        permissions: {
+          read:  [
+            PERMS.StepCount
+          ]
+        }
+      }
+
+      AppleHealthKit.initHealthKit(healthKitOptions, (err, results) => {
+        if (err) {
+          console.log("error initializing Healthkit: ", err);
+          return;
+        }
+
+        const initialDate = new Date();
+        const options = {
+          startDate: new Date(initialDate.getFullYear(), initialDate.getMonth(), initialDate.getDate() - 7).toISOString(),
+          includeManuallyAdded: true
+        };
+
+        AppleHealthKit.getDailyStepCountSamples(options, (err, results) => {
+          if (results) {
+            setSteps(results);
+          }
+        });
+      });
+    }
+  }, []);
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -32,40 +63,15 @@ const App: () => React$Node = () => {
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
+          {
+            steps.map((item, index) => {
+              return (
+                <View key={index} style={{ marginVertical: 10 }}>
+                  <Text>{item.startDate} - {item.value}</Text>
+                </View>
+              )
+            })
+          }
         </ScrollView>
       </SafeAreaView>
     </>
