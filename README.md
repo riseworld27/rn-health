@@ -1,4 +1,4 @@
-# React Native Heanth App
+# React Native Health App
 
 ## Running the project
 
