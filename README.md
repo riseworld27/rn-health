@@ -1,4 +1,5 @@
 # React Native Health App
+This project integrates with Apple HealthKit on iOS and Google Fit on android. And shows the last 7 days of steps.
 
 ## Running the project
 
@@ -19,6 +20,5 @@ yarn start
 
 - Run iOS
 ```
-npx react-native run-ios
+yarn ios
 ```
-
