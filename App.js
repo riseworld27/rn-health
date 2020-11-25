@@ -18,10 +18,6 @@ import {
 } from 'react-native';
 import AppleHealthKit from 'rn-apple-healthkit';
 
-import {
-  Colors,
-} from 'react-native/Libraries/NewAppScreen';
-
 const App = () => {
   const [steps, setSteps] = useState([]);
   useEffect(() => {
@@ -62,12 +58,21 @@ const App = () => {
       <SafeAreaView>
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
+          style={styles.scrollView}
+        >
+          <View style={styles.itemRow}>
+            <Text>Date</Text>
+            <Text>Steps</Text>
+          </View>
           {
             steps.map((item, index) => {
               return (
-                <View key={index} style={{ marginVertical: 10 }}>
-                  <Text>{item.startDate} - {item.value}</Text>
+                <View
+                  key={index}
+                  style={[styles.itemRow, { backgroundColor: index % 2 ? '#f7f7f2' : '#efefef' }]}
+                >
+                  <Text>{item.startDate.slice(0, 10)}</Text>
+                  <Text>{item.value}</Text>
                 </View>
               )
             })
@@ -80,40 +85,15 @@ const App = () => {
 
 const styles = StyleSheet.create({
   scrollView: {
-    backgroundColor: Colors.lighter,
+    marginTop: 50,
+    marginHorizontal: 50,
+    height: '100%',
   },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
+  itemRow: {
+    paddingVertical: 10,
+    paddingHorizontal: 5,
+    justifyContent: 'space-between',
+    flexDirection: 'row'
   },
 });
 
