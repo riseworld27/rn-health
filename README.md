@@ -24,3 +24,8 @@ yarn start
 ```
 yarn ios
 ```
+
+- Run Android
+```
+yarn android
+```
