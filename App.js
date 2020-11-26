@@ -109,24 +109,26 @@ const App = () => {
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}
         >
-          <View style={styles.itemRow}>
-            <Text>Date</Text>
-            <Text>Steps</Text>
+          <View style={styles.container}>
+            <View style={styles.itemRow}>
+              <Text style={styles.titleLabel}>Date</Text>
+              <Text style={styles.titleLabel}>Steps</Text>
+            </View>
+            {
+              steps.map((item, index) => {
+                const dateValue = item.startDate || item.date;
+                return (
+                  <View
+                    key={index}
+                    style={[styles.itemRow, { backgroundColor: index % 2 ? '#f7f7f2' : '#efefef' }]}
+                  >
+                    <Text>{dateValue.slice(0, 10)}</Text>
+                    <Text>{item.value}</Text>
+                  </View>
+                )
+              })
+            }
           </View>
-          {
-            steps.map((item, index) => {
-              const dateValue = item.startDate || item.date;
-              return (
-                <View
-                  key={index}
-                  style={[styles.itemRow, { backgroundColor: index % 2 ? '#f7f7f2' : '#efefef' }]}
-                >
-                  <Text>{dateValue.slice(0, 10)}</Text>
-                  <Text>{item.value}</Text>
-                </View>
-              )
-            })
-          }
         </ScrollView>
       </SafeAreaView>
     </>
@@ -139,12 +141,21 @@ const styles = StyleSheet.create({
     marginHorizontal: 50,
     height: '100%',
   },
+  container: {
+    borderColor: 'grey',
+    borderWidth: 1,
+    borderRadius: 3,
+    overflow: 'hidden',
+  },
   itemRow: {
     paddingVertical: 10,
     paddingHorizontal: 5,
     justifyContent: 'space-between',
     flexDirection: 'row'
   },
+  titleLabel: {
+    fontWeight: '600',
+  }
 });
 
 export default App;
