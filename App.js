@@ -91,7 +91,7 @@ const App = () => {
         };
         const stepsData = await GoogleFit.getDailyStepCountSamples(options);
         stepsData.map(item => {
-          if (item.source === "com.google.android.gms:merge_step_deltas") {
+          if (item.steps.length > 0) {
             setSteps(item.steps);
           }
         })
