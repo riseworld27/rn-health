@@ -101,6 +101,11 @@ const App = () => {
     }
   }, []);
 
+  const getEmoticonText = (stepValue) => {
+    if (stepValue > 1000) return '😃';
+    else return '🙁';
+  }
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -109,26 +114,29 @@ const App = () => {
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}
         >
-          <View style={styles.container}>
-            <View style={styles.itemRow}>
-              <Text style={styles.titleLabel}>Date</Text>
-              <Text style={styles.titleLabel}>Steps</Text>
-            </View>
-            {
-              steps.map((item, index) => {
-                const dateValue = item.startDate || item.date;
-                return (
-                  <View
-                    key={index}
-                    style={[styles.itemRow, { backgroundColor: index % 2 ? '#f7f7f2' : '#efefef' }]}
-                  >
-                    <Text>{dateValue.slice(0, 10)}</Text>
-                    <Text>{item.value}</Text>
-                  </View>
-                )
-              })
-            }
-          </View>
+        {
+          steps.map((item, index) => {
+            const dateValue = item.startDate || item.date;
+            return (
+              <View
+                key={index}
+                style={styles.itemRow}
+              >
+                <View>
+                  <Text>
+                    {dateValue.slice(0, 10)}
+                  </Text>
+                  <Text style={styles.stepLabel}>
+                    {item.value}
+                  </Text>
+                </View>
+                <Text style={styles.emoticonLabel}>
+                  {getEmoticonText(item.value)}
+                </Text>
+              </View>
+            )
+          })
+        }
         </ScrollView>
       </SafeAreaView>
     </>
@@ -148,13 +156,24 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   itemRow: {
+    marginVertical: 7,
     paddingVertical: 10,
-    paddingHorizontal: 5,
+    paddingHorizontal: 10,
+    borderRadius: 5,
+    backgroundColor: '#daeaed',
     justifyContent: 'space-between',
+    alignItems: 'center',
     flexDirection: 'row'
   },
   titleLabel: {
     fontWeight: '600',
+  },
+  stepLabel: {
+    fontWeight: '700',
+    fontSize: 25
+  },
+  emoticonLabel: {
+    fontSize: 30,
   }
 });
 
